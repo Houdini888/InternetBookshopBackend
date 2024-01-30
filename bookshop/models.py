@@ -7,5 +7,10 @@ class Book(models.Model):
     category=models.CharField(max_length=255)
     cover = models.ImageField(upload_to='book_covers/', null=True, blank=True)
 
+    def get_absolute_cover_url(self):
+        if self.cover:
+            return f'http://localhost:8000{self.cover.url}'
+        return ''
+
     def __str__(self):
         return self.title
